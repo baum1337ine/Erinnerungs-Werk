@@ -303,7 +303,7 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 }
 .showcase-side {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 40px 24px; position: relative;
+  padding: 0; position: relative; overflow: hidden; isolation: isolate;
 }
 .showcase-before {
   background: linear-gradient(145deg, #c8c0b4, #a89e90);
@@ -311,19 +311,59 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 .showcase-after {
   background: linear-gradient(145deg, #f0dfc8, #e2cdb0, #d8c0a0);
 }
+.showcase-side::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.24), transparent 38%),
+    linear-gradient(to right, rgba(0,0,0,0.12), transparent 28%);
+  pointer-events: none;
+}
+.showcase-side::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), inset 0 -30px 40px rgba(0,0,0,0.08);
+}
+.showcase-side-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.showcase-before .showcase-side-image {
+  object-position: 50% 52%;
+  transform: scale(1.03);
+  filter: grayscale(1) contrast(1.05) sepia(0.14);
+}
+.showcase-after .showcase-side-image {
+  object-position: 50% 54%;
+  transform: scale(1.03);
+}
+.showcase-side-headline {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  font-family: var(--ff-display);
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.94);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+}
 .showcase-side-label {
   position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
   font-family: var(--ff-body); font-size: 0.6rem; font-weight: 700;
   letter-spacing: 0.3em; text-transform: uppercase;
   padding: 6px 20px; border-radius: 0;
+  z-index: 2;
 }
 .showcase-before .showcase-side-label { background: rgba(0,0,0,0.4); color: #fff; }
 .showcase-after .showcase-side-label { background: var(--gold); color: #fff; }
-.showcase-icon { font-size: 3.5rem; opacity: 0.35; margin-bottom: 12px; }
-.showcase-side p {
-  font-family: var(--ff-display); font-size: 1.1rem; font-style: italic;
-  color: rgba(0,0,0,0.35);
-}
 .showcase-divider-v {
   position: absolute; top: 0; bottom: 0; left: 50%; z-index: 2;
   width: 2px; background: rgba(255,255,255,0.8);
@@ -337,11 +377,6 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   display: flex; align-items: center; justify-content: center;
   font-size: 0.7rem; font-weight: 700; color: var(--ink-light);
   font-family: var(--ff-body); letter-spacing: 0.05em;
-}
-.showcase-caption {
-  text-align: center; margin-top: 24px;
-  font-family: var(--ff-accent); font-size: 0.88rem; font-style: italic;
-  color: var(--ink-muted);
 }
 
 /* ─── PROCESS ─── */
@@ -584,6 +619,44 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   white-space: nowrap;
 }
 .form-row button:hover { background: var(--umber); border-color: var(--umber); }
+.lead-form {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.form-consents {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+.consent-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 12px 14px;
+  border: 1px solid rgba(28,24,18,0.12);
+  background: rgba(255,255,255,0.72);
+}
+.consent-check input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.15rem 0 0;
+  accent-color: var(--gold);
+}
+.consent-check label {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.consent-check label a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+.consent-check-required {
+  border-color: rgba(184, 148, 63, 0.25);
+}
 
 .contact-links {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px;
@@ -597,16 +670,6 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 .contact-links .contact-muted {
   font-family: var(--ff-body); font-size: 0.82rem; color: var(--ink-muted);
   padding: 8px 0;
-}
-.form-note {
-  margin-top: 12px;
-  font-size: 0.78rem;
-  color: var(--ink-muted);
-}
-.form-note code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
-  color: var(--ink-soft);
 }
 .form-error {
   margin: 16px auto 0;
@@ -741,15 +804,6 @@ body.modal-open { overflow: hidden; }
   font-family: var(--ff-accent);
   font-size: 0.95rem;
 }
-.legal-sheet-note {
-  margin-top: 16px;
-  border: 1px solid rgba(184, 148, 63, 0.28);
-  background: rgba(232, 213, 160, 0.12);
-  padding: 12px 14px;
-  color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.6;
-}
 .legal-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -842,7 +896,10 @@ body.modal-open { overflow: hidden; }
   .hero-scroll-hint { display: none; }
   .topbar-inner { height: 64px; }
   .logo { font-size: 1.3rem; }
-  .showcase-photo { grid-template-columns: 1fr; }
+  .showcase-photo { grid-template-columns: 1fr; aspect-ratio: auto; }
+  .showcase-side { min-height: 280px; }
+  .showcase-before .showcase-side-image { object-position: 50% 52%; transform: scale(1.02); }
+  .showcase-after .showcase-side-image { object-position: 50% 54%; transform: scale(1.02); }
   .showcase-frame { aspect-ratio: auto; }
   .abo-visual { display: none; }
   .pcard-top, .pcard-bottom { padding-left: 28px; padding-right: 28px; }
@@ -914,20 +971,19 @@ body.modal-open { overflow: hidden; }
     <div class="showcase-frame anim-scale">
       <div class="showcase-photo">
         <div class="showcase-side showcase-before">
-          <span class="showcase-icon">🖼</span>
-          <p>Ihr Originalfoto</p>
+          <img class="showcase-side-image" src="assets/showcase-original.jpg" alt="Historisches Originalfoto vor der Restaurierung" loading="lazy" decoding="async">
+          <span class="showcase-side-headline">Originalfoto</span>
           <span class="showcase-side-label">Vorher</span>
         </div>
         <div class="showcase-side showcase-after">
-          <span class="showcase-icon">✨</span>
-          <p>Von uns restauriert</p>
+          <img class="showcase-side-image" src="assets/showcase-colored.jpg" alt="Koloriertes und restauriertes Familienfoto" loading="lazy" decoding="async">
+          <span class="showcase-side-headline">Restauriert & koloriert</span>
           <span class="showcase-side-label">Nachher</span>
         </div>
       </div>
       <div class="showcase-divider-v"></div>
       <div class="showcase-badge">↔</div>
     </div>
-    <p class="showcase-caption anim-up">Hier erscheint bald ein echtes Kundenbeispiel — mit Erlaubnis der Familie</p>
   </div>
 </section>
 
@@ -1081,15 +1137,32 @@ body.modal-open { overflow: hidden; }
       <div class="cta-phone"><a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a></div>
       <p class="cta-sub">Telefonnummer & WhatsApp folgen · E-Mail-Anfragen jederzeit</p>
       
-      <form class="form-row" id="lead-form" novalidate>
-        <label class="sr-only hp-field" for="lead-company">Firma (leer lassen)</label>
-        <input class="hp-field" id="lead-company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input id="lead-form-ts" name="form_ts" type="hidden" value="">
-        <label class="sr-only" for="lead-email">Ihre E-Mail-Adresse</label>
-        <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
-        <button type="submit">Foto anfordern</button>
+      <form class="lead-form" id="lead-form" novalidate>
+        <div class="form-row">
+          <label class="sr-only hp-field" for="lead-company">Firma (leer lassen)</label>
+          <input class="hp-field" id="lead-company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input id="lead-form-ts" name="form_ts" type="hidden" value="">
+          <label class="sr-only" for="lead-email">Ihre E-Mail-Adresse</label>
+          <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
+          <button type="submit">Foto anfordern</button>
+        </div>
+        <div class="form-consents" aria-label="Einwilligungen">
+          <div class="consent-check consent-check-required">
+            <input id="lead-consent-required" name="consent_required" type="checkbox" required>
+            <label for="lead-consent-required">
+              Ich akzeptiere die Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage und habe die
+              <a href="#legal-datenschutz" data-legal-open="datenschutz" aria-haspopup="dialog" aria-controls="legal-modal">Datenschutzhinweise</a>
+              gelesen. (erforderlich)
+            </label>
+          </div>
+          <div class="consent-check">
+            <input id="lead-consent-newsletter" name="consent_newsletter" type="checkbox">
+            <label for="lead-consent-newsletter">
+              Ich möchte zusätzlich per E-Mail Neuigkeiten und Angebote von ErinnerungsWerk erhalten. (optional)
+            </label>
+          </div>
+        </div>
       </form>
-      <p class="form-note">Formular ist für Supabase vorbereitet (`public.erinnerungswerk_leads`). Falls die Tabelle/Policy noch fehlt, bitte vorerst per E-Mail schreiben.</p>
       <p id="ty" role="status" aria-live="polite" tabindex="-1" hidden style="margin:24px auto 0;padding:20px 28px;max-width:500px;border:1px solid rgba(45,134,83,0.2);color:var(--sage);font-weight:600;text-align:center;">✓ Vielen Dank — wir melden uns innerhalb von 24 Stunden.</p>
       <p id="lead-error" class="form-error" role="alert" hidden>Das Formular konnte gerade nicht gespeichert werden. Bitte senden Sie uns Ihre Anfrage direkt an <a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a>.</p>
       
@@ -1127,8 +1200,7 @@ body.modal-open { overflow: hidden; }
     <div class="legal-sheet-hero">
       <p class="legal-sheet-eyebrow">Rechtliches</p>
       <h2 class="legal-sheet-heading" id="legal-impressum">Impressum</h2>
-      <p class="legal-sheet-sub">Diese Angaben wurden auf Basis der Sphaera-Website übernommen und für ErinnerungsWerk angepasst (insbesondere die Kontakt-E-Mail-Adresse).</p>
-      <p class="legal-sheet-note"><strong>Offen:</strong> Telefonnummer folgt noch. Falls sich Rechtsform, Unternehmensstatus oder steuerliche Angaben für ErinnerungsWerk unterscheiden, bitte ergänzen/anpassen.</p>
+      <p class="legal-sheet-sub">Angaben zum Anbieter dieses Webauftritts und zu den gesetzlichen Informationspflichten für erinnerungs-werk.de.</p>
     </div>
 
     <div class="legal-grid">
@@ -1182,13 +1254,13 @@ body.modal-open { overflow: hidden; }
 
       <article class="legal-block">
         <h3>Verbraucherstreitbeilegung</h3>
-        <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (falls erforderlich, bitte anpassen).</p>
+        <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       </article>
 
       <article class="legal-block legal-block-full">
         <h3>Rechtlicher Hinweis</h3>
         <p>Je nach tatsächlichem Geschäftsmodell, Vertriebsform, steuerlicher Einordnung oder regulatorischen Anforderungen können weitere Angaben erforderlich sein.</p>
-        <p>Vor dauerhaftem Produktivbetrieb sollte eine rechtliche Prüfung erfolgen.</p>
+        <p>Maßgeblich sind die jeweils anwendbaren gesetzlichen Vorschriften.</p>
         <p class="legal-meta">Stand: 24. Februar 2026</p>
       </article>
     </div>
@@ -1200,8 +1272,7 @@ body.modal-open { overflow: hidden; }
     <div class="legal-sheet-hero">
       <p class="legal-sheet-eyebrow">Rechtliches</p>
       <h2 class="legal-sheet-heading" id="legal-datenschutz">Datenschutz</h2>
-      <p class="legal-sheet-sub">Strukturierte Datenschutzbasis für ErinnerungsWerk mit euren aktuell genannten Diensten (Supabase und Umami) und der Kontakt-E-Mail <a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a>.</p>
-      <p class="legal-sheet-note"><strong>Wichtig:</strong> Vor Livegang rechtlich prüfen und um Hosting-Anbieter, Telefonnummer, konkrete Löschfristen und Consent-Setup ergänzen.</p>
+      <p class="legal-sheet-sub">Informationen zur Verarbeitung personenbezogener Daten auf erinnerungs-werk.de, insbesondere bei Kontaktanfragen, Formularnutzung und Webanalyse.</p>
     </div>
 
     <div class="legal-grid">
@@ -1221,7 +1292,7 @@ body.modal-open { overflow: hidden; }
       <article class="legal-block">
         <h3>3. Hosting & Server-Logfiles</h3>
         <p>Beim Aufruf der Website können technisch erforderliche Daten verarbeitet werden (z. B. IP-Adresse, Datum/Uhrzeit, User-Agent, Referrer), soweit dies für den Betrieb und die Sicherheit der Website notwendig ist.</p>
-        <p>Den konkreten Hosting-Anbieter und die dazugehörigen AV-Angaben bitte vor Livegang ergänzen.</p>
+        <p>Je nach technischem Hosting-Setup können hierfür beauftragte technische Dienstleister eingesetzt werden.</p>
       </article>
 
       <article class="legal-block">
@@ -1232,14 +1303,14 @@ body.modal-open { overflow: hidden; }
 
       <article class="legal-block legal-block-full">
         <h3>5. Formular / Lead-Speicherung über Supabase</h3>
-        <p>Für das Website-Formular ist eine Speicherung über Supabase (<code>supabase.co</code>) vorgesehen. Verarbeitet werden insbesondere die eingegebene E-Mail-Adresse sowie technische Metadaten der Anfrage (z. B. Seitenpfad, Zeitpunkt, ggf. Spracheinstellung).</p>
+        <p>Formularanfragen werden über Supabase (<code>supabase.co</code>) verarbeitet und gespeichert. Verarbeitet werden insbesondere die eingegebene E-Mail-Adresse sowie technische Metadaten der Anfrage (z. B. Seitenpfad, Zeitpunkt, ggf. Spracheinstellung).</p>
         <p>Rechtsgrundlage ist regelmäßig Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Kommunikation) oder Art. 6 Abs. 1 lit. f DSGVO (effiziente Bearbeitung von Anfragen), abhängig vom Einzelfall.</p>
       </article>
 
       <article class="legal-block">
         <h3>6. Webanalyse (Umami)</h3>
-        <p>Für die Webanalyse ist der Einsatz von Umami Cloud über <code>cloud.umami.is</code> vorgesehen bzw. vorbereitet. Umami wird als datenschutzfreundliche Webanalyse ohne Google Analytics eingesetzt.</p>
-        <p>Vor Livegang ist zu prüfen und zu dokumentieren, ob und in welcher Form ein Consent-Banner erforderlich ist.</p>
+        <p>Für die Webanalyse wird Umami Cloud über <code>cloud.umami.is</code> eingesetzt. Umami wird als datenschutzfreundliche Webanalyse ohne Google Analytics verwendet.</p>
+        <p>Soweit gesetzlich erforderlich, erfolgt der Einsatz auf Grundlage einer Einwilligung oder einer sonstigen einschlägigen Rechtsgrundlage.</p>
       </article>
 
       <article class="legal-block">
@@ -1254,7 +1325,7 @@ body.modal-open { overflow: hidden; }
 
       <article class="legal-block">
         <h3>8. Speicherdauer</h3>
-        <p>Personenbezogene Daten werden gelöscht, sobald der Zweck entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Konkrete Löschfristen bitte vor Livegang je Datenkategorie festlegen.</p>
+        <p>Personenbezogene Daten werden gelöscht, sobald der Zweck entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die konkrete Speicherdauer richtet sich nach Art und Zweck der jeweiligen Verarbeitung.</p>
       </article>
 
       <article class="legal-block">
@@ -1264,12 +1335,12 @@ body.modal-open { overflow: hidden; }
 
       <article class="legal-block">
         <h3>10. Beschwerderecht</h3>
-        <p>Es besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde. Die zuständige Behörde sollte vor Livegang ergänzt oder allgemein beschrieben werden.</p>
+        <p>Es besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde.</p>
       </article>
 
       <article class="legal-block legal-block-full">
         <h3>11. Stand & Hinweis</h3>
-        <p>Stand: 24. Februar 2026. Diese Datenschutzinformationen sind eine strukturierte Basis und sollten vor dem finalen Produktivbetrieb rechtlich geprüft und an das finale Setup angepasst werden.</p>
+        <p>Stand: 24. Februar 2026. Diese Datenschutzhinweise gelten für den aktuellen Webauftritt und die darüber angebotenen Kontaktmöglichkeiten.</p>
       </article>
     </div>
   </div>
@@ -1415,6 +1486,8 @@ body.modal-open { overflow: hidden; }
   const emailInput = document.getElementById('lead-email');
   const honeypot = document.getElementById('lead-company');
   const formTimestampField = document.getElementById('lead-form-ts');
+  const consentRequiredCheckbox = document.getElementById('lead-consent-required');
+  const consentNewsletterCheckbox = document.getElementById('lead-consent-newsletter');
   const errorBox = document.getElementById('lead-error');
   const submitButton = form?.querySelector('button[type="submit"]');
   const defaultSubmitLabel = submitButton?.textContent || 'Foto anfordern';
@@ -1451,15 +1524,20 @@ body.modal-open { overflow: hidden; }
     submitButton.textContent = 'Wird gesendet…';
   };
 
-  const saveLeadToSupabase = async (email) => {
+  const saveLeadToSupabase = async ({ email, consentRequired, consentNewsletter }) => {
     if (!supabaseClient) throw new Error('Supabase client not initialized');
+    const nowIso = new Date().toISOString();
 
     const payload = {
       email,
       source: 'landing_form',
       page_path: window.location.pathname,
       locale: document.documentElement.lang || navigator.language || 'de',
-      consent_privacy: true
+      consent_privacy: consentRequired,
+      consent_required: consentRequired,
+      consent_newsletter: consentNewsletter,
+      consent_captured_at: nowIso,
+      newsletter_opt_in_at: consentNewsletter ? nowIso : null
     };
 
     let result = await supabaseClient.from(SUPABASE_TABLE).insert(payload);
@@ -1491,6 +1569,7 @@ body.modal-open { overflow: hidden; }
         showSuccess();
         return;
       }
+      if (!consentRequiredCheckbox?.checked) return;
 
       const startedAt = Number(formTimestampField?.value || 0);
       const elapsedMs = startedAt > 0 ? Date.now() - startedAt : 0;
@@ -1503,8 +1582,16 @@ body.modal-open { overflow: hidden; }
       setSubmitting();
 
       try {
-        await saveLeadToSupabase(emailInput.value.trim());
-        track('erinnerungswerk_lead_submit', { source: 'landing_form' });
+        const consentNewsletter = Boolean(consentNewsletterCheckbox?.checked);
+        await saveLeadToSupabase({
+          email: emailInput.value.trim(),
+          consentRequired: true,
+          consentNewsletter
+        });
+        track('erinnerungswerk_lead_submit', {
+          source: 'landing_form',
+          newsletter_opt_in: consentNewsletter ? 'yes' : 'no'
+        });
         showSuccess();
       } catch (error) {
         console.error('Lead form submit failed', error);
