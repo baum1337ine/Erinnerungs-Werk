@@ -1165,6 +1165,38 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   background: rgba(255,255,255,0.46);
   box-shadow: var(--shadow-soft);
 }
+.form-message-wrap {
+  margin-top: 12px;
+  text-align: left;
+}
+.form-message-label {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+.form-message {
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  border: 1px solid rgba(28,24,18,0.10);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.94);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  padding: 14px 16px;
+  box-shadow: 0 10px 20px rgba(28,24,18,0.03);
+}
+.form-message::placeholder { color: var(--ink-muted); }
+.form-message:focus {
+  outline: none;
+  border-color: rgba(184, 148, 63, 0.34);
+  box-shadow: 0 10px 20px rgba(28,24,18,0.03), 0 0 0 3px rgba(184, 148, 63, 0.10);
+}
 .form-consents {
   margin-top: 12px;
   display: grid;
@@ -1576,6 +1608,11 @@ body.modal-open { overflow: hidden; }
     padding: 15px 16px;
     justify-content: center;
     box-shadow: 0 12px 22px rgba(28,24,18,0.14);
+  }
+  .form-message {
+    min-height: 104px;
+    padding: 14px 15px;
+    border-radius: 14px;
   }
   .consent-check { border-radius: 12px; }
   .contact-next-steps { margin-top: 20px; }
@@ -1990,6 +2027,17 @@ body.modal-open { overflow: hidden; }
           <label class="sr-only" for="lead-email">Ihre E-Mail-Adresse</label>
           <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
           <button type="submit">Beispiel anfordern</button>
+        </div>
+        <div class="form-message-wrap">
+          <label class="form-message-label" for="lead-message">Optional: Anlass, Wünsche oder Fragen</label>
+          <textarea
+            id="lead-message"
+            class="form-message"
+            name="inquiry_message"
+            rows="4"
+            maxlength="1200"
+            placeholder="z. B. Für den 70. Geburtstag meiner Mutter, 12 Fotos vorhanden, eher natürlicher Look, Lieferung bis Mitte April…"
+          ></textarea>
         </div>
         <div class="form-consents" aria-label="Einwilligungen">
           <div class="consent-check consent-check-required">
@@ -2532,6 +2580,7 @@ body.modal-open { overflow: hidden; }
   const form = document.getElementById('lead-form');
   const thanks = document.getElementById('ty');
   const emailInput = document.getElementById('lead-email');
+  const messageInput = document.getElementById('lead-message');
   const honeypot = document.getElementById('lead-company');
   const formTimestampField = document.getElementById('lead-form-ts');
   const consentRequiredCheckbox = document.getElementById('lead-consent-required');
@@ -2572,12 +2621,13 @@ body.modal-open { overflow: hidden; }
     submitButton.textContent = 'Wird gesendet…';
   };
 
-  const saveLeadToSupabase = async ({ email, consentRequired, consentNewsletter }) => {
+  const saveLeadToSupabase = async ({ email, inquiryMessage, consentRequired, consentNewsletter }) => {
     const client = await ensureSupabaseClient();
     const nowIso = new Date().toISOString();
 
     const payload = {
       email,
+      inquiry_message: inquiryMessage || null,
       source: 'landing_form',
       page_path: window.location.pathname,
       locale: document.documentElement.lang || navigator.language || 'de',
@@ -2605,7 +2655,9 @@ body.modal-open { overflow: hidden; }
 
   stampFormTime();
   emailInput?.addEventListener('focus', stampFormTime, { once: true });
+  messageInput?.addEventListener('focus', stampFormTime, { once: true });
   emailInput?.addEventListener('focus', () => { loadSupabaseSdk().catch(() => {}); }, { once: true });
+  messageInput?.addEventListener('focus', () => { loadSupabaseSdk().catch(() => {}); }, { once: true });
   form?.addEventListener('pointerenter', () => { loadSupabaseSdk().catch(() => {}); }, { once: true });
   form?.addEventListener('touchstart', () => { loadSupabaseSdk().catch(() => {}); }, { once: true, passive: true });
 
@@ -2636,6 +2688,7 @@ body.modal-open { overflow: hidden; }
         const consentNewsletter = Boolean(consentNewsletterCheckbox?.checked);
         await saveLeadToSupabase({
           email: emailInput.value.trim(),
+          inquiryMessage: messageInput?.value.trim() || null,
           consentRequired: true,
           consentNewsletter
         });
