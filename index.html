@@ -552,7 +552,10 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 .showcase-frame {
   position: relative; max-width: 900px; margin: 56px auto 0;
   border-radius: var(--radius-l); overflow: hidden;
+  padding: 6px;
   border: 1px solid rgba(28,24,18,0.06);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.88), rgba(247,242,234,0.9));
   box-shadow:
     0 8px 18px rgba(0,0,0,0.03),
     0 16px 40px rgba(0,0,0,0.05),
@@ -560,11 +563,13 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 }
 .showcase-photo {
   display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px;
   aspect-ratio: 16/7;
 }
 .showcase-side {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 0; position: relative; overflow: hidden; isolation: isolate;
+  border-radius: calc(var(--radius-l) - 8px);
 }
 .showcase-before {
   background: linear-gradient(145deg, #c8c0b4, #a89e90);
@@ -577,10 +582,18 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   position: absolute;
   inset: 0;
   z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,0.24), transparent 38%);
+  pointer-events: none;
+}
+.showcase-before::before {
   background:
     linear-gradient(to top, rgba(0,0,0,0.24), transparent 38%),
-    linear-gradient(to right, rgba(0,0,0,0.12), transparent 28%);
-  pointer-events: none;
+    linear-gradient(to right, rgba(0,0,0,0.10), transparent 24%);
+}
+.showcase-after::before {
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.24), transparent 38%),
+    linear-gradient(to left, rgba(0,0,0,0.10), transparent 24%);
 }
 .showcase-side::after {
   content: '';
@@ -627,20 +640,29 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
 .showcase-before .showcase-side-label { background: rgba(0,0,0,0.4); color: #fff; }
 .showcase-after .showcase-side-label { background: var(--gold); color: #fff; }
 .showcase-divider-v {
-  position: absolute; top: 0; bottom: 0; left: 50%; z-index: 2;
-  width: 2px; background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 24px rgba(0,0,0,0.1);
+  display: none;
 }
 .showcase-badge {
-  position: absolute; top: 50%; left: 50%; z-index: 3;
-  transform: translate(-50%, -50%);
-  width: 58px; height: 58px; border-radius: 50%;
-  background: rgba(255,255,255,0.95);
-  border: 1px solid rgba(28,24,18,0.06);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; color: var(--ink-light);
-  font-family: var(--ff-body); letter-spacing: 0.05em;
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(28,24,18,0.07);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--ink-light);
+  font-family: var(--ff-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 .showcase-caption {
   margin: 16px auto 0;
@@ -1519,6 +1541,7 @@ body.modal-open { overflow: hidden; }
     letter-spacing: 0.06em;
   }
   .showcase-photo { grid-template-columns: 1fr; aspect-ratio: auto; }
+  .showcase-badge { display: none; }
   .showcase-side { min-height: 280px; }
   .showcase-before .showcase-side-image { object-position: 50% 50%; transform: scale(1.02); }
   .showcase-after .showcase-side-image { object-position: 50% 50%; transform: scale(1.02); }
@@ -1736,8 +1759,7 @@ body.modal-open { overflow: hidden; }
           <span class="showcase-side-label">Nachher</span>
         </div>
       </div>
-      <div class="showcase-divider-v"></div>
-      <div class="showcase-badge">↔</div>
+      <div class="showcase-badge" aria-hidden="true">Vergleich</div>
     </div>
     <div class="detail-pills showcase-improvements anim-up">
       <div class="detail-pill"><strong>Farbe</strong> natürliche Kolorierung statt Filter-Look</div>
