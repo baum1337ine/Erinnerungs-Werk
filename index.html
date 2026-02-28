@@ -530,10 +530,12 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   .marquee-wrap,
   .process-section,
   .quote-section,
+  .maker-section,
   .products-section,
   .abo,
   .free-section,
   .cta-final,
+  .faq-section,
   .site-footer {
     content-visibility: auto;
     contain-intrinsic-size: 900px;
@@ -779,6 +781,35 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   letter-spacing: 0.12em;
   font-weight: 700;
 }
+.process-support-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media(min-width:900px) {
+  .process-support-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.process-support-card {
+  border: 1px solid rgba(28,24,18,0.08);
+  border-radius: var(--radius-m);
+  background: rgba(255,255,255,0.72);
+  box-shadow: 0 8px 18px rgba(28,24,18,0.03);
+  padding: 14px 14px 13px;
+}
+.process-support-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.process-support-card span {
+  color: var(--ink-light);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
 
 /* ─── PRODUCTS ─── */
 .products-section { background: var(--cream-white); }
@@ -1020,6 +1051,214 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   color: var(--ink-light);
   font-size: 0.82rem;
 }
+.quote-shell {
+  display: grid;
+  gap: 18px;
+}
+.quote-rotator {
+  position: relative;
+  min-height: 430px;
+}
+.quote-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+.quote-slide.is-active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.quote-slide .quote-content {
+  max-width: 820px;
+}
+.quote-kicker {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.quote-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quote-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(28,24,18,0.14);
+  background: rgba(255,255,255,0.58);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.quote-dot.is-active,
+.quote-dot:hover,
+.quote-dot:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.05);
+  outline: none;
+}
+.quote-note {
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+/* ─── MAKER ─── */
+.maker-section {
+  background: var(--parchment);
+}
+.maker-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-top: 40px;
+}
+@media(min-width:900px) {
+  .maker-grid { grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr); }
+}
+.maker-mark-shell,
+.maker-card {
+  border: 1px solid rgba(28,24,18,0.08);
+  border-radius: var(--radius-l);
+  background: rgba(255,255,255,0.76);
+  box-shadow: var(--shadow-soft);
+}
+.maker-mark-shell {
+  padding: 26px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 85% 60% at 82% 12%, rgba(184,148,63,0.08), transparent 62%),
+    rgba(255,255,255,0.78);
+}
+.maker-mark-card {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+.maker-portrait-placeholder {
+  width: min(100%, 220px);
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  border: 1px solid rgba(28,24,18,0.08);
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255,255,255,0.7), rgba(255,255,255,0.04) 22%),
+    linear-gradient(180deg, rgba(184,148,63,0.15), rgba(247,242,234,0.22));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 16px 34px rgba(28,24,18,0.07);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.maker-portrait-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(61,54,43,0.14);
+}
+.maker-portrait-placeholder::after {
+  content: '';
+  position: absolute;
+  bottom: 12%;
+  width: 62%;
+  height: 42%;
+  border-radius: 26px 26px 12px 12px;
+  background: rgba(61,54,43,0.12);
+}
+.maker-portrait-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(28,24,18,0.08);
+  background: rgba(255,255,255,0.84);
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.maker-portrait-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(184,148,63,0.16);
+  background: rgba(184,148,63,0.06);
+  color: var(--ink-soft);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.maker-mark-card strong {
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.maker-mark-card span {
+  color: var(--ink-light);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 260px;
+}
+.maker-card {
+  padding: clamp(24px, 4vw, 38px);
+}
+.maker-lead {
+  font-family: var(--ff-accent);
+  color: var(--ink-light);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.maker-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+.maker-list li {
+  display: flex;
+  gap: 10px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+.maker-list li::before {
+  content: '•';
+  color: var(--gold);
+  font-weight: 700;
+}
+.maker-note {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(184,148,63,0.18);
+  background: rgba(184,148,63,0.06);
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
 
 /* ─── FREE OFFER ─── */
 .free-section { background: var(--cream-white); }
@@ -1080,6 +1319,88 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   line-height: 1.55;
 }
 
+/* ─── FAQ ─── */
+.faq-section {
+  background: var(--cream-white);
+}
+.faq-grid {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media(min-width:860px) {
+  .faq-grid { grid-template-columns: 1fr 1fr; }
+}
+.faq-item {
+  border: 1px solid rgba(28,24,18,0.08);
+  border-radius: var(--radius-l);
+  background: rgba(255,255,255,0.86);
+  box-shadow: var(--shadow-soft);
+  padding: 22px 22px 20px;
+}
+.faq-item h3 {
+  margin: 0 0 10px;
+  font-family: var(--ff-display);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.faq-item p {
+  color: var(--ink-light);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+/* ─── ABO COMPACT ─── */
+.abo-compact-shell {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-xl);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 22px 58px rgba(0,0,0,0.18);
+  padding: clamp(24px, 4vw, 34px);
+}
+.abo-compact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+}
+@media(min-width:900px) {
+  .abo-compact-grid { grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr); }
+}
+.abo-compact-copy p {
+  font-family: var(--ff-accent);
+  color: rgba(247,242,234,0.74);
+  line-height: 1.8;
+}
+.abo-compact-copy .detail-pills {
+  margin-top: 16px;
+}
+.abo-compact-copy .detail-pill {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(247,242,234,0.76);
+}
+.abo-compact-copy .detail-pill strong {
+  color: var(--gold-bright);
+}
+.abo-compact-aside {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-l);
+  background: rgba(255,255,255,0.04);
+  padding: 18px 18px 16px;
+}
+.abo-compact-aside .abo-price-tag {
+  margin-top: 0;
+}
+.abo-compact-note {
+  margin-top: 12px;
+  color: rgba(247,242,234,0.52);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
 /* ─── CTA FINAL ─── */
 .cta-final {
   background:
@@ -1120,6 +1441,20 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   color: var(--ink-muted);
   font-size: 0.82rem;
   line-height: 1.55;
+}
+.contact-certainty {
+  margin: 16px auto 0;
+  max-width: 760px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  border: 1px solid rgba(184,148,63,0.18);
+  background: rgba(255,255,255,0.72);
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+.contact-certainty strong {
+  color: var(--ink);
 }
 .contact-next-steps {
   max-width: 860px;
@@ -1633,9 +1968,14 @@ body.modal-open { overflow: hidden; }
   .showcase-frame { aspect-ratio: auto; }
   .showcase-improvements { margin-top: 14px; }
   .showcase-caption { font-size: 0.78rem; padding: 0 8px; }
+  .quote-rotator { min-height: 520px; }
+  .quote-dots { gap: 8px; }
+  .maker-mark-shell { padding: 20px; }
+  .maker-card { padding: 22px 18px; }
   .abo-visual { display: none; }
   .pcard-top, .pcard-bottom { padding-left: 28px; padding-right: 28px; }
   .packages-note { margin-top: 18px; }
+  .contact-certainty { font-size: 0.8rem; padding: 12px 14px; }
   .lead-form { padding: 12px; border-radius: 18px; }
   .form-row {
     gap: 10px;
@@ -1671,6 +2011,8 @@ body.modal-open { overflow: hidden; }
   .contact-next-steps { margin-top: 20px; }
   .contact-step { padding: 12px; }
   .contact-links { gap: 10px; }
+  .faq-item { padding: 18px 16px 16px; }
+  .abo-compact-shell { padding: 18px; }
   .footer-meta-row { margin-top: 18px; font-size: 0.76rem; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1747,33 +2089,47 @@ body.modal-open { overflow: hidden; }
             </div>
             <em>03</em>
           </a>
-          <a href="#abo" class="brand-menu-link" data-brand-menu-link>
-            <div>
-              <strong>Monatliche Erinnerung</strong>
-              <span>Optionales Abo als Ergänzung</span>
-            </div>
-            <em>04</em>
-          </a>
           <a href="#gratis" class="brand-menu-link" data-brand-menu-link>
             <div>
               <strong>Kostenlos testen</strong>
               <span>Erstes Beispiel unverbindlich</span>
             </div>
-            <em>05</em>
+            <em>04</em>
           </a>
           <a href="#kontakt" class="brand-menu-link" data-brand-menu-link>
             <div>
               <strong>Kontakt</strong>
               <span>Anfrage senden & E-Mail eintragen</span>
             </div>
+            <em>05</em>
+          </a>
+          <a href="#fragen" class="brand-menu-link" data-brand-menu-link>
+            <div>
+              <strong>Häufige Fragen</strong>
+              <span>Die wichtigsten Antworten vorab</span>
+            </div>
             <em>06</em>
+          </a>
+          <a href="#wer" class="brand-menu-link" data-brand-menu-link>
+            <div>
+              <strong>Wer macht das?</strong>
+              <span>Persönliche Betreuung & Vertrauen</span>
+            </div>
+            <em>07</em>
+          </a>
+          <a href="#abo" class="brand-menu-link" data-brand-menu-link>
+            <div>
+              <strong>Monatliche Erinnerung</strong>
+              <span>Optionale Ergänzung zum Hauptprojekt</span>
+            </div>
+            <em>08</em>
           </a>
         </div>
       </nav>
     </div>
     <div class="topbar-right">
       <a class="topbar-phone" href="tel:+4915678219176" aria-label="Telefonische Beratung">0156 78219176</a>
-      <a href="#kontakt" class="topbar-cta">Kostenloses Beispiel anfordern</a>
+      <a href="#kontakt" class="topbar-cta">Kostenloses Beispiel anfragen</a>
     </div>
   </div>
 </header>
@@ -1787,7 +2143,7 @@ body.modal-open { overflow: hidden; }
     <h1>Lassen Sie vergangene Familienmomente wieder <em>lebendig werden</em></h1>
     <p class="hero-body">Wir restaurieren verblasste Familienfotos, hauchen ihnen Farbe ein und verwandeln sie in ein liebevoll gestaltetes Buch — das die Geschichten Ihrer Familie für immer bewahrt.</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn-main"><span>Kostenloses Beispielfoto →</span></a>
+      <a href="#kontakt" class="btn-main"><span>Kostenloses Beispiel anfragen →</span></a>
       <a href="mailto:info@erinnerungs-werk.de" class="btn-ghost">E-Mail schreiben</a>
     </div>
     <div class="hero-emotion-shell anim-up anim-up-d1">
@@ -1807,12 +2163,12 @@ body.modal-open { overflow: hidden; }
 <div class="marquee-wrap">
   <div class="marquee-track">
     <span class="marquee-item">Persönliche Beratung per E-Mail oder Telefon</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Ihre Fotos sind bei uns sicher</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Scans oder Handyfotos reichen meist aus</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Deutschsprachiger Service</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Lieferung in 2–3 Wochen</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Erstes Foto kostenlos</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Persönliche Beratung per E-Mail oder Telefon</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Ihre Fotos sind bei uns sicher</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Scans oder Handyfotos reichen meist aus</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Deutschsprachiger Service</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Lieferung in 2–3 Wochen</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Erstes Foto kostenlos</span><span class="marquee-dot">✦</span>
@@ -1862,9 +2218,9 @@ body.modal-open { overflow: hidden; }
     <div class="process-grid">
       <div class="proc-step anim-up anim-up-d1">
         <div class="proc-icon">📸</div>
-        <h3>Fotos einsenden</h3>
-        <p>Per E-Mail, telefonisch oder auf Wunsch per Post. Egal wie alt, vergilbt oder beschädigt: Wir prüfen zuerst ehrlich, was sinnvoll restaurierbar ist.</p>
-        <div class="proc-meta">1. Schritt · Start per Kontaktaufnahme</div>
+        <h3>Anfrage & Bildprüfung</h3>
+        <p>Sie starten mit einer unverbindlichen Anfrage. Danach sagen wir Ihnen persönlich, ob ein Scan, ein Handyfoto oder nur im Ausnahmefall das Original sinnvoll ist.</p>
+        <div class="proc-meta">1. Schritt · Erstkontakt & Einschätzung</div>
       </div>
       <div class="proc-step anim-up anim-up-d2">
         <div class="proc-icon">🎨</div>
@@ -1885,31 +2241,104 @@ body.modal-open { overflow: hidden; }
         <div class="proc-meta">4. Schritt · Übergabe & Geschenk</div>
       </div>
     </div>
+    <div class="process-support-grid anim-up">
+      <div class="process-support-card">
+        <strong>Scan reicht meist aus</strong>
+        <span>Am besten sind gerade Scans. Wenn das nicht möglich ist, reichen in vielen Fällen bereits klare Handyfotos bei Tageslicht.</span>
+      </div>
+      <div class="process-support-card">
+        <strong>Originale nur wenn nötig</strong>
+        <span>Wir bevorzugen digitale Vorlagen. Ein Versand von Originalfotos erfolgt nur nach persönlicher Absprache und nur dann, wenn es wirklich sinnvoll ist.</span>
+      </div>
+      <div class="process-support-card">
+        <strong>Ehrliche Einschätzung</strong>
+        <span>Bei stark beschädigten Fotos sagen wir offen, was realistisch restaurierbar ist und wo Grenzen liegen, bevor Sie sich entscheiden.</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═══ QUOTE ═══ -->
 <section class="quote-section">
   <div class="wrap">
-    <div class="quote-content anim-up">
-      <span class="quote-stars">★ ★ ★ ★ ★</span>
-      <div class="quote-text">Als meine Mutter ihr Kindheitsfoto zum ersten Mal in Farbe sah, war sie tief berührt. Sie hat das Buch seitdem jedem gezeigt, der zu Besuch kommt. Das wertvollste Geschenk, das ich ihr je gemacht habe.</div>
-      <div class="divider"></div>
-      <div class="quote-author">Sabine K. — Tochter, 54 Jahre</div>
-      <div class="quote-proof-grid">
-        <div class="quote-proof-item">
-          <strong>Geschenk-Moment</strong>
-          <span>Besonders beliebt für runde Geburtstage und Jubiläen.</span>
-        </div>
-        <div class="quote-proof-item">
-          <strong>Familienfokus</strong>
-          <span>Aus Fotos und Erinnerungen entsteht ein gemeinsames Stück Geschichte.</span>
-        </div>
-        <div class="quote-proof-item">
-          <strong>Persönliche Betreuung</strong>
-          <span>Keine anonyme Massenabwicklung, sondern direkte Abstimmung.</span>
-        </div>
+    <div class="quote-shell anim-up">
+      <div class="quote-rotator" aria-live="polite">
+        <article class="quote-slide is-active" data-quote-slide>
+          <div class="quote-content">
+            <p class="quote-kicker">Rückmeldung zu einem 70. Geburtstag</p>
+            <span class="quote-stars">★ ★ ★ ★ ★</span>
+            <div class="quote-text">Als meine Mutter ihr Kindheitsfoto zum ersten Mal in Farbe sah, war sie tief berührt. Sie hat das Buch seitdem jedem gezeigt, der zu Besuch kommt. Das wertvollste Geschenk, das ich ihr je gemacht habe.</div>
+            <div class="divider"></div>
+            <div class="quote-author">Sabine K. — Tochter zum 70. Geburtstag ihrer Mutter</div>
+            <div class="quote-proof-grid">
+              <div class="quote-proof-item">
+                <strong>Geschenk-Moment</strong>
+                <span>Besonders beliebt für runde Geburtstage und Jubiläen.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Familienfokus</strong>
+                <span>Aus Fotos und Erinnerungen entsteht ein gemeinsames Stück Geschichte.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Persönliche Betreuung</strong>
+                <span>Keine anonyme Massenabwicklung, sondern direkte Abstimmung.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="quote-slide" data-quote-slide>
+          <div class="quote-content">
+            <p class="quote-kicker">Rückmeldung zum Hochzeitstag der Eltern</p>
+            <span class="quote-stars">★ ★ ★ ★ ★</span>
+            <div class="quote-text">Wir wollten zum Hochzeitstag etwas schenken, das nicht nur schön aussieht, sondern wirklich etwas auslöst. Genau das ist passiert. Aus einem alten Foto wurde wieder ein Moment, über den meine Eltern sofort angefangen haben zu erzählen.</div>
+            <div class="divider"></div>
+            <div class="quote-author">Anonymisierte Rückmeldung — Tochter zum Hochzeitstag</div>
+            <div class="quote-proof-grid">
+              <div class="quote-proof-item">
+                <strong>Würdig</strong>
+                <span>Gerade für besondere Meilensteine wirkt das Ergebnis persönlich und hochwertig.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Behutsam</strong>
+                <span>Die Bildwirkung bleibt vertraut, nur klarer, wärmer und wieder lebendig.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Unverbindlich</strong>
+                <span>Die Entscheidung fällt erst nach einer echten Vorschau und ruhiger Abstimmung.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="quote-slide" data-quote-slide>
+          <div class="quote-content">
+            <p class="quote-kicker">Rückmeldung zu einem Geschenk für den Großvater</p>
+            <span class="quote-stars">★ ★ ★ ★ ★</span>
+            <div class="quote-text">Wir hatten nur ein altes, vergilbtes Foto und dachten, da sei kaum noch etwas zu retten. Dass daraus wieder ein Bild wurde, das man bei der Feier herumreicht und allen zeigt, hat die ganze Familie überrascht.</div>
+            <div class="divider"></div>
+            <div class="quote-author">Anonymisierte Rückmeldung — Enkel als Familiengeschenk</div>
+            <div class="quote-proof-grid">
+              <div class="quote-proof-item">
+                <strong>Realistisch</strong>
+                <span>Auch bei schwierigen Vorlagen gibt es zuerst eine ehrliche Einschätzung statt leerer Versprechen.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Sicher</strong>
+                <span>Digitale Zusendung reicht meist aus. Originale werden nur nach persönlicher Rücksprache benötigt.</span>
+              </div>
+              <div class="quote-proof-item">
+                <strong>Familientauglich</strong>
+                <span>Ein Ergebnis, das man verschenkt, zeigt und über Jahre gern wieder in die Hand nimmt.</span>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
+      <div class="quote-dots" aria-label="Kundenstimmen wechseln">
+        <button type="button" class="quote-dot is-active" data-quote-dot aria-label="Kundenstimme 1"></button>
+        <button type="button" class="quote-dot" data-quote-dot aria-label="Kundenstimme 2"></button>
+        <button type="button" class="quote-dot" data-quote-dot aria-label="Kundenstimme 3"></button>
+      </div>
+      <p class="quote-note">Die Rückmeldungen wurden gekürzt und auf Wunsch anonymisiert wiedergegeben. Entscheidend ist fast immer derselbe Moment: wenn aus einem alten Foto wieder etwas wird, das man gerne zeigt und verschenkt.</p>
     </div>
   </div>
 </section>
@@ -1933,9 +2362,9 @@ body.modal-open { overflow: hidden; }
         <div class="pcard-bottom">
           <ul class="pcard-list">
             <li>10 Fotos restauriert & koloriert</li>
-            <li>20-seitige Mini-Biografie</li>
+            <li>20-seitige Mini-Biografie im A4-Format</li>
             <li>Persönliche Abstimmung per E-Mail oder Telefon</li>
-            <li>1 Exemplar als Softcover</li>
+            <li>1 Exemplar als Softcover, Versand inklusive</li>
             <li>Alle Fotos auch digital</li>
             <li>Lieferung in 2–3 Wochen</li>
           </ul>
@@ -1956,9 +2385,9 @@ body.modal-open { overflow: hidden; }
         <div class="pcard-bottom">
           <ul class="pcard-list">
             <li>20 Fotos restauriert & koloriert</li>
-            <li>40-seitige Biografie mit Stammbaum</li>
+            <li>40-seitige Biografie mit Stammbaum im A4-Format</li>
             <li>Persönliche Abstimmung per E-Mail oder Telefon</li>
-            <li>2 Exemplare als Hardcover</li>
+            <li>2 Exemplare als Hardcover, Versand inklusive</li>
             <li>Digitales Familienarchiv</li>
             <li>Stammbaum-Beilage</li>
             <li>Lieferung in 2–3 Wochen</li>
@@ -1973,49 +2402,18 @@ body.modal-open { overflow: hidden; }
     <div class="packages-note anim-up">
       <div class="packages-note-card">
         <strong>Vorab-Prüfung</strong>
-        <span>Wir schauen uns zuerst den Zustand Ihrer Fotos an und geben eine ehrliche Einschätzung zum Aufwand.</span>
+        <span>Wir schauen uns zuerst den Zustand Ihrer Fotos an und geben eine ehrliche Einschätzung zum Aufwand, bevor Sie etwas buchen.</span>
       </div>
       <div class="packages-note-card">
-        <strong>Transparenz</strong>
-        <span>Sie sehen vorab ein kostenloses Beispielbild, bevor Sie sich für ein Paket entscheiden.</span>
+        <strong>Vorlagen</strong>
+        <span>Scans sind ideal. Wenn kein Scanner vorhanden ist, reichen oft gute Handyfotos. Originale nur nach persönlicher Absprache.</span>
       </div>
       <div class="packages-note-card">
-        <strong>Individuell</strong>
-        <span>Wenn Ihr Projekt abweicht (mehr Fotos, Sonderwünsche), erhalten Sie ein passendes Angebot.</span>
+        <strong>Versand inklusive</strong>
+        <span>Die Bücher werden versandfertig geliefert. Bei Sonderwünschen, mehr Fotos oder abweichendem Umfang erhalten Sie ein passendes Angebot.</span>
       </div>
     </div>
-    <p class="packages-disclaimer anim-up">Alle Angaben vorbehaltlich finaler Abstimmung nach Foto-Check. Ziel ist immer ein Ergebnis, das zum Anlass und Budget Ihrer Familie passt.</p>
-  </div>
-</section>
-
-<!-- ═══ ABO ═══ -->
-<section class="abo" id="abo">
-  <div class="wrap">
-    <div class="abo-inner">
-      <div class="abo-visual anim-scale">
-        <div class="abo-mockup">
-          <div class="stamp">📬</div>
-          <p>Ihre monatliche Erinnerung</p>
-        </div>
-      </div>
-      <div class="anim-up">
-        <div class="sec-label" style="color:var(--gold-bright)">Neu</div>
-        <h2 class="sec-title" style="color:var(--parchment)">Die monatliche <strong>Erinnerung</strong></h2>
-        <p style="font-family:var(--ff-accent);color:rgba(247,242,234,0.6);line-height:1.8;margin-bottom:8px;">Jeden Monat ein neues restauriertes Foto als hochwertiger Kunstdruck — direkt in den Briefkasten Ihrer Eltern. Wie ein stiller Gruß aus vergangenen Zeiten.</p>
-        <div class="detail-pills" style="margin:18px 0 6px;">
-          <div class="detail-pill" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);color:rgba(247,242,234,0.76);"><strong style="color:var(--gold-bright)">Optional</strong> als Ergänzung zum Buch</div>
-          <div class="detail-pill" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);color:rgba(247,242,234,0.76);"><strong style="color:var(--gold-bright)">Flexibel</strong> später jederzeit startbar</div>
-        </div>
-        <div class="abo-price-tag">14,90€ <small>/Monat</small></div>
-        <ul class="abo-features">
-          <li>Ein restauriertes Foto als A5-Kunstdruck</li>
-          <li>Persönliche Geschichte auf der Rückseite</li>
-          <li>Versand direkt an Ihre Eltern</li>
-          <li>Jederzeit kündbar, keine Mindestlaufzeit</li>
-        </ul>
-        <a href="#kontakt" class="btn-gold"><span>Abo starten →</span></a>
-      </div>
-    </div>
+    <p class="packages-disclaimer anim-up">Alle Angaben gelten nach finaler Abstimmung auf Basis Ihrer Vorlagen. Ziel ist immer ein Ergebnis, das zum Anlass, Umfang und Budget Ihrer Familie passt.</p>
   </div>
 </section>
 
@@ -2033,15 +2431,15 @@ body.modal-open { overflow: hidden; }
       </div>
       <div class="free-body">
         <p class="free-kicker">So funktioniert der Test</p>
-        <h3 style="font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:16px;">Schicken Sie uns ein altes Foto</h3>
-        <p style="font-family:var(--ff-accent);font-size:0.98rem;line-height:1.8;color:var(--ink-light);margin-bottom:18px;">Per E-Mail oder telefonisch. Innerhalb von 24 Stunden erhalten Sie eine restaurierte und kolorierte Version zurück — kostenlos und ohne Verpflichtung. So sehen Sie vorab, was für Ihre Familienfotos möglich ist.</p>
+        <h3 style="font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:16px;">Fragen Sie Ihr kostenloses Beispiel an</h3>
+        <p style="font-family:var(--ff-accent);font-size:0.98rem;line-height:1.8;color:var(--ink-light);margin-bottom:18px;">Sie starten mit einer kurzen Anfrage per Formular, E-Mail oder Telefon. Innerhalb von 24 Stunden sagen wir Ihnen, welche Vorlage wir brauchen und wie Ihr kostenloses Beispiel am schnellsten starten kann — unverbindlich und ohne Kaufdruck.</p>
         <ul class="free-list">
-          <li>Ein Foto einsenden (am besten möglichst gerade fotografiert oder gescannt)</li>
-          <li>Wir restaurieren und kolorieren ein Beispielbild zur Vorschau</li>
-          <li>Sie entscheiden erst danach in Ruhe über das passende Paket</li>
+          <li>Sie senden zuerst nur Ihre unverbindliche Anfrage</li>
+          <li>Wir melden uns persönlich und sagen Ihnen, ob Scan, Handyfoto oder nur im Ausnahmefall das Original sinnvoll ist</li>
+          <li>Sie erhalten eine restaurierte und kolorierte Vorschau, bevor Sie in Ruhe über ein Paket entscheiden</li>
         </ul>
-        <a href="#kontakt" class="btn-main"><span>Foto einsenden →</span></a>
-        <p class="free-meta">Tipp für beste Ergebnisse: Foto bei Tageslicht aufnehmen, ohne starke Spiegelungen und möglichst gerade von oben.</p>
+        <a href="#kontakt" class="btn-main"><span>Kostenloses Beispiel anfragen →</span></a>
+        <p class="free-meta">Tipp für beste Ergebnisse: Scans sind ideal. Bei Handyfotos helfen Tageslicht, ein gerader Winkel und möglichst wenig Spiegelung. Eine Verpflichtung entsteht dadurch noch nicht.</p>
       </div>
     </div>
   </div>
@@ -2074,7 +2472,8 @@ body.modal-open { overflow: hidden; }
             <span>Ideal für Geburtstage, Jubiläen und Familienfeiern.</span>
           </div>
         </div>
-        <p class="cta-proof-note">Sie erreichen uns persönlich per E-Mail oder telefonisch unter 0156 78219176.</p>
+        <p class="cta-proof-note">Sie erreichen uns persönlich per E-Mail oder telefonisch unter 0156 78219176. Telefontermine stimmen wir direkt ab, Rückrufe erfolgen in der Regel innerhalb von 24 Stunden.</p>
+        <p class="contact-certainty"><strong>Ohne Restzweifel:</strong> Ihre Anfrage ist unverbindlich. Kein Kauf, kein Abo und kein Newsletter ohne aktives Häkchen. Sie sehen zuerst, was möglich ist, und entscheiden erst danach in Ruhe.</p>
       </div>
       
       <form class="lead-form" id="lead-form" novalidate>
@@ -2084,7 +2483,7 @@ body.modal-open { overflow: hidden; }
           <input id="lead-form-ts" name="form_ts" type="hidden" value="">
           <label class="sr-only" for="lead-email">Ihre E-Mail-Adresse</label>
           <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" required>
-          <button type="submit">Beispiel anfordern</button>
+          <button type="submit">Beispiel anfragen</button>
         </div>
         <div class="form-message-wrap">
           <label class="form-message-label" for="lead-message">Optional: Anlass, Wünsche oder Fragen</label>
@@ -2136,7 +2535,7 @@ body.modal-open { overflow: hidden; }
           <span class="contact-step-no">3</span>
           <div>
             <strong>Entscheidung</strong>
-            <span>Erst danach entscheiden Sie, ob und welches Paket für Ihre Familie passend ist.</span>
+            <span>Erst danach entscheiden Sie in Ruhe, ob überhaupt und welches Paket für Ihre Familie passend ist.</span>
           </div>
         </div>
       </div>
@@ -2146,7 +2545,99 @@ body.modal-open { overflow: hidden; }
         <a href="tel:+4915678219176">☎ 0156 78219176</a>
         <span class="contact-muted">Persönliche Beratung per E-Mail oder Telefon</span>
       </div>
-      <p class="contact-footnote">Mit dem Eintrag Ihrer E-Mail erhalten Sie ausschließlich Rückmeldungen zu Ihrer Anfrage. Newsletter nur, wenn Sie das optionale Häkchen aktiv setzen.</p>
+      <p class="contact-footnote">Mit dem Eintrag Ihrer E-Mail erhalten Sie ausschließlich Rückmeldungen zu Ihrer Anfrage. Newsletter nur, wenn Sie das optionale Häkchen aktiv setzen. Ohne Auftrag entstehen Ihnen keine Kosten.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section" id="fragen">
+  <div class="wrap">
+    <div class="anim-up">
+      <div class="sec-label">Häufige Fragen</div>
+      <h2 class="sec-title">Klarheit vorab. <strong>Ohne Unsicherheit.</strong></h2>
+      <p class="sec-sub">Die häufigsten Fragen beantworten wir direkt hier, damit Sie schon vor Ihrer Anfrage wissen, wie unkompliziert der Ablauf tatsächlich ist.</p>
+    </div>
+    <div class="faq-grid">
+      <article class="faq-item anim-up anim-up-d1">
+        <h3>Müssen wir Originale schicken?</h3>
+        <p>Nein. In den meisten Fällen reichen Scans völlig aus. Wenn kein Scanner vorhanden ist, genügen oft auch gute, gerade Handyfotos. Originale schicken Sie nur dann ein, wenn es wirklich nötig ist und wir das vorher persönlich mit Ihnen abstimmen.</p>
+      </article>
+      <article class="faq-item anim-up anim-up-d2">
+        <h3>Reichen Handyfotos?</h3>
+        <p>Ja, häufig schon. Wichtig sind Tageslicht, ein möglichst gerader Winkel und wenig Spiegelung. Wenn die Aufnahme sauber ist, können wir daraus oft bereits sehr gut arbeiten. Wenn wir mehr Qualität brauchen, sagen wir Ihnen das offen.</p>
+      </article>
+      <article class="faq-item anim-up anim-up-d3">
+        <h3>Wie lange dauert es?</h3>
+        <p>Das erste Feedback und die Einschätzung kommen in der Regel innerhalb von 24 Stunden. Für das fertige Erinnerungsstück liegen die meisten Projekte je nach Umfang bei etwa 2 bis 3 Wochen.</p>
+      </article>
+      <article class="faq-item anim-up anim-up-d4">
+        <h3>Was, wenn das Foto stark beschädigt ist?</h3>
+        <p>Dann prüfen wir besonders sorgfältig, was realistisch wiederherstellbar ist. Sie erhalten eine ehrliche Einschätzung, keine übertriebenen Versprechen. Wenn Grenzen sichtbar bleiben, sagen wir das klar, bevor Sie sich entscheiden.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAKER ═══ -->
+<section class="maker-section" id="wer">
+  <div class="wrap">
+    <div class="anim-up">
+      <div class="sec-label">Wer macht das?</div>
+      <h2 class="sec-title">Persönlich geführt. <strong>Mit echter Sorgfalt.</strong></h2>
+      <p class="sec-sub">ErinnerungsWerk wird persönlich von Dominik Schuller betreut. Kein anonymer Ablauf, keine Massenabwicklung, sondern direkte Abstimmung von Mensch zu Mensch.</p>
+    </div>
+    <div class="maker-grid">
+      <div class="maker-mark-shell anim-scale">
+        <div class="maker-mark-card">
+          <div class="maker-portrait-placeholder" aria-hidden="true">
+            <span class="maker-portrait-badge">Persönliches Portrait</span>
+          </div>
+          <strong>Dominik Schuller</strong>
+          <div class="maker-portrait-caption">Foto wird ergänzt</div>
+          <span>Deutschsprachige, persönliche Begleitung vom ersten Beispiel bis zum fertigen Erinnerungsstück.</span>
+        </div>
+      </div>
+      <div class="maker-card anim-up">
+        <p class="maker-lead">Gerade bei Familienfotos geht es nicht nur um Technik. Es geht um Vertrauen, Fingerspitzengefühl und darum, dass jede Vorlage würdevoll behandelt wird. Deshalb bleibt die Abstimmung persönlich und nachvollziehbar.</p>
+        <ul class="maker-list">
+          <li>Direkte Abstimmung per E-Mail oder Telefon statt anonymer Ticket-Kommunikation</li>
+          <li>Jede Anfrage wird individuell geprüft, bevor ein Paket empfohlen wird</li>
+          <li>Scans und Handyfotos reichen in den meisten Fällen völlig aus</li>
+          <li>Versand von Originalen nur dann, wenn es wirklich nötig ist und vorher persönlich abgestimmt wurde</li>
+        </ul>
+        <p class="maker-note">Im Impressum finden Sie die Statusangabe <strong>I/E</strong>. Gemeint ist damit eine persönlich geführte, individuell betreute Tätigkeit ohne anonyme Agenturstruktur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABO ═══ -->
+<section class="abo" id="abo">
+  <div class="wrap">
+    <div class="abo-compact-shell">
+      <div class="abo-compact-grid">
+        <div class="abo-compact-copy anim-up">
+          <div class="sec-label" style="color:var(--gold-bright)">Optional</div>
+          <h2 class="sec-title" style="color:var(--parchment);margin-bottom:16px;">Die monatliche <strong>Erinnerung</strong></h2>
+          <p>Wenn Sie nach dem Buch noch eine leise, fortlaufende Geste suchen: Jeden Monat ein restauriertes Foto als hochwertiger Kunstdruck für Ihre Eltern. Wie ein stiller Gruß aus vergangenen Zeiten.</p>
+          <div class="detail-pills">
+            <div class="detail-pill"><strong>Ergänzung</strong> bewusst kleiner als das Hauptprojekt</div>
+            <div class="detail-pill"><strong>Flexibel</strong> jederzeit später startbar</div>
+          </div>
+        </div>
+        <div class="abo-compact-aside anim-scale">
+          <div class="abo-price-tag">14,90€ <small>/Monat</small></div>
+          <ul class="abo-features">
+            <li>Ein restauriertes Foto als A5-Kunstdruck</li>
+            <li>Persönliche Geschichte auf der Rückseite</li>
+            <li>Versand direkt an Ihre Eltern</li>
+            <li>Jederzeit kündbar, keine Mindestlaufzeit</li>
+          </ul>
+          <a href="#kontakt" class="btn-gold"><span>Abo später anfragen →</span></a>
+          <p class="abo-compact-note">Dieses Abo ist eine optionale Ergänzung und bewusst nachgelagert. Der Kern von ErinnerungsWerk bleibt Ihr persönliches Erinnerungsbuch.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2177,6 +2668,8 @@ body.modal-open { overflow: hidden; }
         <a href="#pakete">Pakete</a>
         <a href="#gratis">Kostenlos testen</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="#fragen">Fragen</a>
+        <a href="#wer">Wer macht das?</a>
         <a href="#legal-impressum" data-legal-open="impressum" aria-haspopup="dialog" aria-controls="legal-modal">Impressum</a>
         <a href="#legal-datenschutz" data-legal-open="datenschutz" aria-haspopup="dialog" aria-controls="legal-modal">Datenschutz</a>
       </div>
@@ -2217,6 +2710,7 @@ body.modal-open { overflow: hidden; }
             <dd>I/E</dd>
           </div>
         </dl>
+        <p class="legal-meta">Die Abkürzung <strong>I/E</strong> steht hier für eine persönlich geführte, individuell betreute Tätigkeit ohne anonyme Agenturstruktur.</p>
       </article>
 
       <article class="legal-block">
@@ -2254,9 +2748,9 @@ body.modal-open { overflow: hidden; }
       </article>
 
       <article class="legal-block legal-block-full">
-        <h3>Rechtlicher Hinweis</h3>
-        <p>Je nach tatsächlichem Geschäftsmodell, Vertriebsform, steuerlicher Einordnung oder regulatorischen Anforderungen können weitere Angaben erforderlich sein.</p>
-        <p>Maßgeblich sind die jeweils anwendbaren gesetzlichen Vorschriften.</p>
+        <h3>Aktualität</h3>
+        <p>Wir prüfen und aktualisieren die Angaben in diesem Impressum regelmäßig, damit sie den aktuellen Stand dieses Webauftritts widerspiegeln.</p>
+        <p>Bei Rückfragen zu den hier aufgeführten Informationen können Sie uns jederzeit über die angegebenen Kontaktwege erreichen.</p>
         <p class="legal-meta">Stand: 24. Februar 2026</p>
       </article>
     </div>
@@ -2374,7 +2868,11 @@ body.modal-open { overflow: hidden; }
   const legalModalContent = document.getElementById('legal-modal-content');
   const legalModalClose = document.getElementById('legal-modal-close');
   const legalTriggers = Array.from(document.querySelectorAll('[data-legal-open]'));
+  const quoteSlides = Array.from(document.querySelectorAll('[data-quote-slide]'));
+  const quoteDots = Array.from(document.querySelectorAll('[data-quote-dot]'));
   let activeLegalTrigger = null;
+  let activeQuoteIndex = 0;
+  let quoteRotationTimer = null;
 
   const loadUmami = () => {
     if (!UMAMI_WEBSITE_ID || umamiLoaded) return;
@@ -2523,6 +3021,26 @@ body.modal-open { overflow: hidden; }
     }
   };
 
+  const setActiveQuote = (index) => {
+    if (!quoteSlides.length) return;
+    activeQuoteIndex = ((index % quoteSlides.length) + quoteSlides.length) % quoteSlides.length;
+    quoteSlides.forEach((slide, slideIndex) => {
+      slide.classList.toggle('is-active', slideIndex === activeQuoteIndex);
+    });
+    quoteDots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('is-active', dotIndex === activeQuoteIndex);
+      dot.setAttribute('aria-pressed', String(dotIndex === activeQuoteIndex));
+    });
+  };
+
+  const startQuoteRotation = () => {
+    if (reduceMotion || quoteSlides.length < 2) return;
+    if (quoteRotationTimer) window.clearInterval(quoteRotationTimer);
+    quoteRotationTimer = window.setInterval(() => {
+      setActiveQuote(activeQuoteIndex + 1);
+    }, 6500);
+  };
+
   let topbarSolid = null;
   let scrollTicking = false;
   const applyScrollState = () => {
@@ -2573,6 +3091,17 @@ body.modal-open { overflow: hidden; }
   } else {
     revealHeroTargets();
     scheduleAfterFirstPaint(initRevealObserver, 900);
+  }
+
+  if (quoteSlides.length) {
+    setActiveQuote(0);
+    quoteDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        setActiveQuote(index);
+        startQuoteRotation();
+      });
+    });
+    startQuoteRotation();
   }
 
   document.addEventListener('click', (event) => {
@@ -2647,7 +3176,7 @@ body.modal-open { overflow: hidden; }
   const consentNewsletterCheckbox = document.getElementById('lead-consent-newsletter');
   const errorBox = document.getElementById('lead-error');
   const submitButton = form?.querySelector('button[type="submit"]');
-  const defaultSubmitLabel = submitButton?.textContent || 'Foto anfordern';
+  const defaultSubmitLabel = submitButton?.textContent || 'Beispiel anfragen';
   const MIN_FORM_FILL_MS = 1800;
 
   const track = (eventName, payload = {}) => {
