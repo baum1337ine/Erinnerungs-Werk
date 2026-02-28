@@ -369,6 +369,53 @@ body::after {
 .hero-actions {
   display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
 }
+.hero-emotion-shell {
+  margin-top: 34px;
+  max-width: 760px;
+}
+.hero-emotion-card {
+  padding: 22px 24px 20px;
+  border: 1px solid rgba(28,24,18,0.08);
+  border-radius: var(--radius-l);
+  background:
+    radial-gradient(ellipse 85% 70% at 82% 8%, rgba(184,148,63,0.09), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,255,255,0.62));
+  box-shadow: var(--shadow-soft);
+}
+.hero-emotion-copy {
+  font-family: var(--ff-display);
+  font-size: clamp(1.28rem, 2.1vw, 1.8rem);
+  line-height: 1.42;
+  color: var(--ink-soft);
+  letter-spacing: -0.015em;
+}
+.hero-emotion-copy strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.hero-emotion-copy em {
+  font-style: italic;
+  color: var(--copper);
+}
+.hero-emotion-meta {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hero-emotion-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(28,24,18,0.07);
+  background: rgba(255,255,255,0.68);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 .hero-proof-grid {
   margin-top: 34px;
   max-width: 900px;
@@ -400,12 +447,6 @@ body::after {
   font-size: 0.82rem;
   line-height: 1.45;
   color: var(--ink-light);
-}
-.hero-inline-note {
-  margin-top: 14px;
-  font-size: 0.82rem;
-  color: var(--ink-muted);
-  letter-spacing: 0.02em;
 }
 
 /* ─── BUTTONS ─── */
@@ -1064,14 +1105,21 @@ section { padding: clamp(80px, 12vw, 140px) 0; }
   margin-bottom: 48px; font-style: italic;
 }
 .cta-trust-row {
-  max-width: 820px;
+  max-width: 980px;
   margin: 0 auto 24px;
 }
-.cta-trust-row .detail-pills {
-  justify-content: center;
+.cta-trust-row .hero-proof-grid {
+  margin-top: 0;
+  max-width: none;
 }
-.cta-trust-row .detail-pill {
+.cta-trust-row .hero-proof-card {
   background: rgba(255,255,255,0.78);
+}
+.cta-proof-note {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 .contact-next-steps {
   max-width: 860px;
@@ -1547,9 +1595,14 @@ body.modal-open { overflow: hidden; }
   .hero { padding: 120px 0 60px; min-height: auto; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn-main, .hero-actions .btn-ghost { justify-content: center; }
+  .hero-emotion-shell { margin-top: 24px; }
+  .hero-emotion-card { padding: 18px 18px 16px; }
+  .hero-emotion-copy { font-size: 1.12rem; }
+  .hero-emotion-meta { gap: 8px; }
+  .hero-emotion-chip { font-size: 0.7rem; letter-spacing: 0.04em; }
   .hero-proof-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
   .hero-proof-card { padding: 12px; }
-  .hero-inline-note { margin-top: 10px; font-size: 0.78rem; }
+  .cta-proof-note { margin-top: 10px; font-size: 0.78rem; }
   .topbar-inner { height: 60px; padding: 0 10px; border-radius: 16px; }
   .topbar-right { gap: 12px; }
   .logo { font-size: 1.18rem; }
@@ -1719,8 +1772,8 @@ body.modal-open { overflow: hidden; }
       </nav>
     </div>
     <div class="topbar-right">
-      <a class="topbar-phone" href="mailto:info@erinnerungs-werk.de" aria-label="Beratung per E-Mail">Beratung aktuell per E-Mail</a>
-      <a href="#kontakt" class="topbar-cta">Gratis Foto testen</a>
+      <a class="topbar-phone" href="tel:+4915678219176" aria-label="Telefonische Beratung">0156 78219176</a>
+      <a href="#kontakt" class="topbar-cta">Kostenloses Beispiel anfordern</a>
     </div>
   </div>
 </header>
@@ -1731,43 +1784,34 @@ body.modal-open { overflow: hidden; }
 <section class="hero">
   <div class="wrap hero-content">
     <div class="hero-eyebrow">Fotorestaurierung & Erinnerungsbücher</div>
-    <h1>Schenken Sie<br>Ihren Eltern ihre<br><em>Kindheit zurück</em></h1>
+    <h1>Lassen Sie vergangene Familienmomente wieder <em>lebendig werden</em></h1>
     <p class="hero-body">Wir restaurieren verblasste Familienfotos, hauchen ihnen Farbe ein und verwandeln sie in ein liebevoll gestaltetes Buch — das die Geschichten Ihrer Familie für immer bewahrt.</p>
     <div class="hero-actions">
       <a href="#kontakt" class="btn-main"><span>Kostenloses Beispielfoto →</span></a>
       <a href="mailto:info@erinnerungs-werk.de" class="btn-ghost">E-Mail schreiben</a>
     </div>
-    <div class="hero-proof-grid anim-up anim-up-d1">
-      <div class="hero-proof-card">
-        <strong>Antwortzeit</strong>
-        <span>Rückmeldung in der Regel innerhalb von 24 Stunden per E-Mail.</span>
-      </div>
-      <div class="hero-proof-card">
-        <strong>Risikofrei</strong>
-        <span>Ein erstes Beispielbild kostenlos und ohne Verpflichtung.</span>
-      </div>
-      <div class="hero-proof-card">
-        <strong>Sorgfalt</strong>
-        <span>Behutsame Restaurierung mit Fokus auf Gesichter und Details.</span>
-      </div>
-      <div class="hero-proof-card">
-        <strong>Für Geschenke</strong>
-        <span>Ideal für Geburtstage, Jubiläen und Familienfeiern.</span>
+    <div class="hero-emotion-shell anim-up anim-up-d1">
+      <div class="hero-emotion-card">
+        <p class="hero-emotion-copy">Wenn ein altes Familienfoto plötzlich wieder <em>lebendig</em> wird, beginnt oft der schönste Teil: erst ein Lächeln, dann Erinnerungen, dann Geschichten, die wieder den ganzen Raum füllen. <strong>So entsteht aus einem verblassten Foto wieder ein Moment, der berührt.</strong></p>
+        <div class="hero-emotion-meta" aria-label="Emotionale Schwerpunkte">
+          <span class="hero-emotion-chip">Kindheit sichtbar machen</span>
+          <span class="hero-emotion-chip">Würdige Geschenke</span>
+          <span class="hero-emotion-chip">Familiengeschichte bewahren</span>
+        </div>
       </div>
     </div>
-    <p class="hero-inline-note anim-up anim-up-d2">E-Mail-Beratung ist bereits aktiv. Telefon und WhatsApp werden ergänzt, sobald die Nummer freigeschaltet ist.</p>
   </div>
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">Persönliche Beratung per E-Mail</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Persönliche Beratung per E-Mail oder Telefon</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Ihre Fotos sind bei uns sicher</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Deutschsprachiger Service</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Lieferung in 2–3 Wochen</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Erstes Foto kostenlos</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Persönliche Beratung per E-Mail</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Persönliche Beratung per E-Mail oder Telefon</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Ihre Fotos sind bei uns sicher</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Deutschsprachiger Service</span><span class="marquee-dot">✦</span>
     <span class="marquee-item">Lieferung in 2–3 Wochen</span><span class="marquee-dot">✦</span>
@@ -1780,7 +1824,7 @@ body.modal-open { overflow: hidden; }
   <div class="wrap">
     <div style="text-align:center;" class="anim-up">
       <div class="sec-label">Vorher & Nachher</div>
-      <h2 class="sec-title">Der Unterschied ist <strong>atemberaubend</strong></h2>
+      <h2 class="sec-title">Was verloren schien, wird wieder <strong>sichtbar</strong></h2>
       <p class="sec-sub" style="margin:0 auto;">Verblasste Erinnerungen werden lebendig. Beschädigte Details kehren zurück. Schwarzweiß wird zu Farbe.</p>
     </div>
     <div class="showcase-frame anim-scale">
@@ -1804,7 +1848,7 @@ body.modal-open { overflow: hidden; }
       <div class="detail-pill"><strong>Details</strong> Gesichter, Konturen und Kontrast behutsam verbessert</div>
       <div class="detail-pill"><strong>Erhalt</strong> Charakter und Ausstrahlung des Originals bleiben erhalten</div>
     </div>
-    <p class="showcase-caption anim-up">Beispiel einer typischen Restaurierung und Kolorierung. Ergebnis und Bearbeitungstiefe richten sich immer nach Zustand, Motiv und gewünschter Natürlichkeit.</p>
+    <p class="showcase-caption anim-up">So kann aus einem verblassten Familienfoto wieder ein Bild werden, das man gerne in die Hand nimmt und zeigt.</p>
   </div>
 </section>
 
@@ -1819,8 +1863,8 @@ body.modal-open { overflow: hidden; }
       <div class="proc-step anim-up anim-up-d1">
         <div class="proc-icon">📸</div>
         <h3>Fotos einsenden</h3>
-        <p>Per E-Mail, später auch per WhatsApp oder Post. Egal wie alt, vergilbt oder beschädigt: Wir prüfen zuerst ehrlich, was sinnvoll restaurierbar ist.</p>
-        <div class="proc-meta">1. Schritt · Start per E-Mail</div>
+        <p>Per E-Mail, telefonisch oder auf Wunsch per Post. Egal wie alt, vergilbt oder beschädigt: Wir prüfen zuerst ehrlich, was sinnvoll restaurierbar ist.</p>
+        <div class="proc-meta">1. Schritt · Start per Kontaktaufnahme</div>
       </div>
       <div class="proc-step anim-up anim-up-d2">
         <div class="proc-icon">🎨</div>
@@ -1849,7 +1893,7 @@ body.modal-open { overflow: hidden; }
   <div class="wrap">
     <div class="quote-content anim-up">
       <span class="quote-stars">★ ★ ★ ★ ★</span>
-      <div class="quote-text">Als meine Mutter ihr Kindheitsfoto zum ersten Mal in Farbe sah, hat sie geweint. Sie hat das Buch seitdem jedem gezeigt, der zu Besuch kommt. Das wertvollste Geschenk, das ich ihr je gemacht habe.</div>
+      <div class="quote-text">Als meine Mutter ihr Kindheitsfoto zum ersten Mal in Farbe sah, war sie tief berührt. Sie hat das Buch seitdem jedem gezeigt, der zu Besuch kommt. Das wertvollste Geschenk, das ich ihr je gemacht habe.</div>
       <div class="divider"></div>
       <div class="quote-author">Sabine K. — Tochter, 54 Jahre</div>
       <div class="quote-proof-grid">
@@ -1876,7 +1920,7 @@ body.modal-open { overflow: hidden; }
     <div style="text-align:center;" class="anim-up">
       <div class="sec-label">Pakete & Preise</div>
       <h2 class="sec-title">Wählen Sie Ihr <strong>Erinnerungs-Paket</strong></h2>
-      <p class="sec-sub" style="margin:0 auto;">Jedes Paket beinhaltet persönliche Betreuung (aktuell per E-Mail), professionelle Restaurierung und ein hochwertig gestaltetes Erinnerungsstück für Ihre Familie.</p>
+      <p class="sec-sub" style="margin:0 auto;">Jedes Paket beinhaltet persönliche Betreuung per E-Mail oder Telefon, professionelle Restaurierung und ein hochwertig gestaltetes Erinnerungsstück für Ihre Familie.</p>
     </div>
     <div class="products-grid">
       <div class="pcard anim-up anim-up-d1">
@@ -1890,7 +1934,7 @@ body.modal-open { overflow: hidden; }
           <ul class="pcard-list">
             <li>10 Fotos restauriert & koloriert</li>
             <li>20-seitige Mini-Biografie</li>
-            <li>Persönliche Abstimmung per E-Mail (Telefon später optional)</li>
+            <li>Persönliche Abstimmung per E-Mail oder Telefon</li>
             <li>1 Exemplar als Softcover</li>
             <li>Alle Fotos auch digital</li>
             <li>Lieferung in 2–3 Wochen</li>
@@ -1913,7 +1957,7 @@ body.modal-open { overflow: hidden; }
           <ul class="pcard-list">
             <li>20 Fotos restauriert & koloriert</li>
             <li>40-seitige Biografie mit Stammbaum</li>
-            <li>Persönliche Abstimmung (E-Mail, später auch telefonisch)</li>
+            <li>Persönliche Abstimmung per E-Mail oder Telefon</li>
             <li>2 Exemplare als Hardcover</li>
             <li>Digitales Familienarchiv</li>
             <li>Stammbaum-Beilage</li>
@@ -1957,7 +2001,7 @@ body.modal-open { overflow: hidden; }
       <div class="anim-up">
         <div class="sec-label" style="color:var(--gold-bright)">Neu</div>
         <h2 class="sec-title" style="color:var(--parchment)">Die monatliche <strong>Erinnerung</strong></h2>
-        <p style="font-family:var(--ff-accent);color:rgba(247,242,234,0.6);line-height:1.8;margin-bottom:8px;">Jeden Monat ein neues restauriertes Foto als hochwertiger Kunstdruck — direkt in den Briefkasten Ihrer Eltern. Wie ein Brief aus der Vergangenheit.</p>
+        <p style="font-family:var(--ff-accent);color:rgba(247,242,234,0.6);line-height:1.8;margin-bottom:8px;">Jeden Monat ein neues restauriertes Foto als hochwertiger Kunstdruck — direkt in den Briefkasten Ihrer Eltern. Wie ein stiller Gruß aus vergangenen Zeiten.</p>
         <div class="detail-pills" style="margin:18px 0 6px;">
           <div class="detail-pill" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);color:rgba(247,242,234,0.76);"><strong style="color:var(--gold-bright)">Optional</strong> als Ergänzung zum Buch</div>
           <div class="detail-pill" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);color:rgba(247,242,234,0.76);"><strong style="color:var(--gold-bright)">Flexibel</strong> später jederzeit startbar</div>
@@ -1979,8 +2023,8 @@ body.modal-open { overflow: hidden; }
 <section class="free-section" id="gratis">
   <div class="wrap">
     <div class="anim-up">
-      <div class="sec-label">Risikofrei testen</div>
-      <h2 class="sec-title">Überzeugen Sie sich — <strong>kostenlos</strong></h2>
+      <div class="sec-label">Sehen Sie zuerst, was möglich ist</div>
+      <h2 class="sec-title">Sehen Sie Ihr Foto wieder <strong>aufleben</strong></h2>
     </div>
     <div class="free-card anim-up">
       <div class="free-visual">
@@ -1990,7 +2034,7 @@ body.modal-open { overflow: hidden; }
       <div class="free-body">
         <p class="free-kicker">So funktioniert der Test</p>
         <h3 style="font-family:var(--ff-display);font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:16px;">Schicken Sie uns ein altes Foto</h3>
-        <p style="font-family:var(--ff-accent);font-size:0.98rem;line-height:1.8;color:var(--ink-light);margin-bottom:18px;">Per E-Mail (WhatsApp folgt in Kürze). Innerhalb von 24 Stunden erhalten Sie eine restaurierte und kolorierte Version zurück — kostenlos und ohne Verpflichtung. So sehen Sie vorab, was für Ihre Familienfotos möglich ist.</p>
+        <p style="font-family:var(--ff-accent);font-size:0.98rem;line-height:1.8;color:var(--ink-light);margin-bottom:18px;">Per E-Mail oder telefonisch. Innerhalb von 24 Stunden erhalten Sie eine restaurierte und kolorierte Version zurück — kostenlos und ohne Verpflichtung. So sehen Sie vorab, was für Ihre Familienfotos möglich ist.</p>
         <ul class="free-list">
           <li>Ein Foto einsenden (am besten möglichst gerade fotografiert oder gescannt)</li>
           <li>Wir restaurieren und kolorieren ein Beispielbild zur Vorschau</li>
@@ -2009,14 +2053,28 @@ body.modal-open { overflow: hidden; }
     <div class="anim-up">
       <div class="sec-label" style="text-align:center">Kontakt</div>
       <h2 class="sec-title" style="text-align:center;max-width:600px;margin:0 auto 0;">Bewahren Sie, was <strong>wirklich zählt</strong></h2>
-      <div class="cta-phone"><a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a></div>
-      <p class="cta-sub">Schicken Sie uns Ihre E-Mail-Adresse und wir melden uns mit dem nächsten Schritt für Ihr kostenloses Beispielbild.</p>
+      <div class="cta-phone"><a href="tel:+4915678219176">0156 78219176</a></div>
+      <p class="cta-sub">Tragen Sie Ihre E-Mail ein, und wir begleiten Sie beim ersten Schritt zu Ihrem Beispielbild.</p>
       <div class="cta-trust-row">
-        <div class="detail-pills">
-          <div class="detail-pill"><strong>Antwort</strong> meist innerhalb von 24h</div>
-          <div class="detail-pill"><strong>Kein Risiko</strong> kostenloses Beispiel vor Buchung</div>
-          <div class="detail-pill"><strong>Persönlich</strong> keine automatische Massenabwicklung</div>
+        <div class="hero-proof-grid">
+          <div class="hero-proof-card">
+            <strong>Antwortzeit</strong>
+            <span>Rückmeldung in der Regel innerhalb von 24 Stunden per E-Mail oder Telefon.</span>
+          </div>
+          <div class="hero-proof-card">
+            <strong>Risikofrei</strong>
+            <span>Ein erstes Beispielbild kostenlos und ohne Verpflichtung.</span>
+          </div>
+          <div class="hero-proof-card">
+            <strong>Sorgfalt</strong>
+            <span>Behutsame Restaurierung mit Fokus auf Gesichter und Details.</span>
+          </div>
+          <div class="hero-proof-card">
+            <strong>Für Geschenke</strong>
+            <span>Ideal für Geburtstage, Jubiläen und Familienfeiern.</span>
+          </div>
         </div>
+        <p class="cta-proof-note">Sie erreichen uns persönlich per E-Mail oder telefonisch unter 0156 78219176.</p>
       </div>
       
       <form class="lead-form" id="lead-form" novalidate>
@@ -2064,7 +2122,7 @@ body.modal-open { overflow: hidden; }
           <span class="contact-step-no">1</span>
           <div>
             <strong>Rückmeldung</strong>
-            <span>Wir antworten per E-Mail und sagen Ihnen kurz, was wir für das Beispielbild von Ihnen brauchen.</span>
+            <span>Wir melden uns persönlich bei Ihnen und sagen Ihnen kurz, was wir für das Beispielbild brauchen.</span>
           </div>
         </div>
         <div class="contact-step">
@@ -2085,7 +2143,8 @@ body.modal-open { overflow: hidden; }
 
       <div class="contact-links">
         <a href="mailto:info@erinnerungs-werk.de">✉ info@erinnerungs-werk.de</a>
-        <span class="contact-muted">💬 Telefon & WhatsApp werden ergänzt, aktuell läuft die Beratung per E-Mail</span>
+        <a href="tel:+4915678219176">☎ 0156 78219176</a>
+        <span class="contact-muted">Persönliche Beratung per E-Mail oder Telefon</span>
       </div>
       <p class="contact-footnote">Mit dem Eintrag Ihrer E-Mail erhalten Sie ausschließlich Rückmeldungen zu Ihrer Anfrage. Newsletter nur, wenn Sie das optionale Häkchen aktiv setzen.</p>
     </div>
@@ -2125,7 +2184,8 @@ body.modal-open { overflow: hidden; }
     <div class="footer-meta-row">
       <span>© 2026 ErinnerungsWerk. Alle Rechte vorbehalten.</span>
       <a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a>
-      <span>Beratung aktuell per E-Mail</span>
+      <a href="tel:+4915678219176">0156 78219176</a>
+      <span>Persönliche Beratung per E-Mail oder Telefon</span>
     </div>
   </div>
 </footer>
@@ -2166,7 +2226,7 @@ body.modal-open { overflow: hidden; }
 
       <article class="legal-block">
         <h3>Kontakt</h3>
-        <p>Telefon: folgt</p>
+        <p>Telefon: <a href="tel:+4915678219176">0156 78219176</a></p>
         <p>E-Mail: <a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a></p>
       </article>
 
@@ -2217,7 +2277,7 @@ body.modal-open { overflow: hidden; }
         <p>ErinnerungsWerk / Dominik Schuller</p>
         <p>Todugari Settlement 76<br>6000 Batumi<br>Georgien</p>
         <p>E-Mail: <a href="mailto:info@erinnerungs-werk.de">info@erinnerungs-werk.de</a></p>
-        <p>Telefon: folgt</p>
+        <p>Telefon: <a href="tel:+4915678219176">0156 78219176</a></p>
       </article>
 
       <article class="legal-block">
@@ -2234,7 +2294,7 @@ body.modal-open { overflow: hidden; }
       <article class="legal-block">
         <h3>4. Kontaktaufnahme</h3>
         <p>Bei Kontaktaufnahme per E-Mail und über das Formular verarbeiten wir die mitgeteilten Daten zur Bearbeitung der Anfrage, Vorbereitung eines Angebots oder einer Test-Restaurierung.</p>
-        <p>Telefon/WhatsApp werden nach Freischaltung der Nummer ergänzt.</p>
+        <p>Kontaktanfragen sind per E-Mail und telefonisch unter <a href="tel:+4915678219176">0156 78219176</a> möglich.</p>
       </article>
 
       <article class="legal-block legal-block-full">
